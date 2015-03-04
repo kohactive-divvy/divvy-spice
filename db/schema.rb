@@ -18,14 +18,15 @@ ActiveRecord::Schema.define(version: 20150304220727) do
   enable_extension "postgis"
 
   create_table "stations", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "station_id"
-    t.decimal  "lat",        precision: 10, scale: 6
-    t.decimal  "lng",        precision: 10, scale: 6
-    t.integer  "capacity"
-    t.datetime "online_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string    "name"
+    t.integer   "station_id"
+    t.decimal   "lat",                                                                 precision: 10, scale: 6
+    t.decimal   "lng",                                                                 precision: 10, scale: 6
+    t.geography "lnglat",     limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.integer   "capacity"
+    t.datetime  "online_at"
+    t.datetime  "created_at",                                                                                   null: false
+    t.datetime  "updated_at",                                                                                   null: false
   end
 
   add_index "stations", ["station_id"], name: "index_stations_on_station_id", using: :btree
