@@ -34,13 +34,13 @@ ActiveRecord::Schema.define(version: 20150305011033) do
   create_table "stations", force: :cascade do |t|
     t.string    "name"
     t.integer   "station_id"
-    t.decimal   "lat",                                                                 precision: 10, scale: 6
-    t.decimal   "lng",                                                                 precision: 10, scale: 6
-    t.geography "lnglat",     limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.decimal   "lat",                                              precision: 10, scale: 6
+    t.decimal   "lng",                                              precision: 10, scale: 6
+    t.geography "lnglat",     limit: {:srid=>0, :type=>"geometry"}
     t.integer   "capacity"
-    t.datetime  "online_at"
-    t.datetime  "created_at",                                                                                   null: false
-    t.datetime  "updated_at",                                                                                   null: false
+    t.datetime  "online_at",                                        precision: 6
+    t.datetime  "created_at",                                       precision: 6,            null: false
+    t.datetime  "updated_at",                                       precision: 6,            null: false
   end
 
   add_index "stations", ["station_id"], name: "index_stations_on_station_id", using: :btree

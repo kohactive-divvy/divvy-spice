@@ -27,6 +27,9 @@ module DivvySpice
       Dir.glob(File.join(File.dirname(__FILE__), "../app/services/**/*.rb")) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
+      Dir.glob(File.join(File.dirname(__FILE__), "../app/extensions/**/*.rb")) do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
     end
 
     # Do not swallow errors in after_commit/after_rollback callbacks.

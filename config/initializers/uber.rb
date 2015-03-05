@@ -1,13 +1,11 @@
-module UberApi
-  def self.included(base)
-
-    def base.user_client
+class UberApi
+  class << self
+    def uber_client
       @client ||= Uber::Client.new do |config|
-        config.server_token  = UBER_SERVER_TOKEN
-        config.client_id     = UBER_APP_ID
-        config.client_secret = USER_SECRET
+        config.server_token  = ENV['UBER_SERVER_TOKEN']
+        config.client_id     = ENV['UBER_APP_ID']
+        config.client_secret = ENV['USER_SECRET']
       end
     end
   end
-
 end
