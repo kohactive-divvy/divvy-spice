@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/johnkoht/bootstrap-sass.git
+  revision: ef0e0eefc03a06a560f1d41ccd4daf02d6386470
+  branch: move-variables-into-components
+  specs:
+    bootstrap-sass (3.1.1.0)
+      sass (~> 3.2)
+
+GIT
   remote: git://github.com/kohactive/manhattan.git
   revision: 6e1766e2b5fdb6a97a644497e15f5f0e05c65dd5
   branch: 0-4-2
@@ -204,6 +212,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgis-adapter (= 3.0.0.beta2)
+  bootstrap-sass!
   byebug
   coffee-rails (~> 4.1.0)
   dotenv-rails

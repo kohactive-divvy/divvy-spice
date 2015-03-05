@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0'
 
 gem 'activerecord-postgis-adapter', '3.0.0.beta2'
+gem 'bootstrap-sass', github: 'johnkoht/bootstrap-sass', branch: 'move-variables-into-components'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'dotenv-rails'
 gem 'frontie'
