@@ -11,11 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304220727) do
+ActiveRecord::Schema.define(version: 20150305011033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "station_trips", force: :cascade do |t|
+    t.integer  "from_station_id"
+    t.integer  "to_station_id"
+    t.integer  "trip_count"
+    t.integer  "average_duration"
+    t.integer  "fastest_trip"
+    t.integer  "slowest_trip"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "station_trips", ["from_station_id"], name: "index_station_trips_on_from_station_id", using: :btree
+  add_index "station_trips", ["to_station_id"], name: "index_station_trips_on_to_station_id", using: :btree
 
   create_table "stations", force: :cascade do |t|
     t.string    "name"
