@@ -24,4 +24,19 @@ namespace :divvy do
       puts "UPDATED FROM #{st.from_station_id} TO #{st.to_station_id}"
     end
   end
+
+  task :station_trip_min_max => :environment do
+    trips = Trip.connection.query("SELECT trips.from_station_id, trips.to_station_id, min(trips.duration), max(trips.duration) FROM trips GROUP BY trips.from_station_id, trips.to_station_id")
+    trips.each do |trip|
+      st = StationTrip.where(from_station_id: trip[0], to_station_id: trip[1]).first
+      st.fastest_trip = trip[2]
+      st.slowest_trip = trip[3]
+      if st.save!
+        puts "From #{trip[0]} to #{trip[1]} fastest is #{trip[2]} slowest is #{trip[3]}"
+      else
+        puts "ERROR! FAIL!"
+      end
+    end
+
+  end
 end
