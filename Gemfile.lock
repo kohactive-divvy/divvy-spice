@@ -64,6 +64,7 @@ GEM
     execjs (2.3.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    geocoder (1.1.8)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
     google_directions (0.1.6.2)
@@ -131,6 +132,7 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    redis (3.2.1)
     rgeo (0.3.20)
     rgeo-activerecord (2.1.0)
       activerecord (~> 4.2)
@@ -186,11 +188,13 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   dotenv-rails
+  geocoder
   google_directions
   jbuilder (~> 2.0)
   jquery-rails
   pg
   rails (= 4.2.0)
+  redis
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

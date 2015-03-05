@@ -7,6 +7,8 @@ gem 'rails', '4.2.0'
 gem 'dotenv-rails'
 
 gem 'google_directions'
+gem 'geocoder'
+gem 'redis'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
