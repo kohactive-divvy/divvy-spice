@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/kohactive/manhattan.git
+  revision: 6e1766e2b5fdb6a97a644497e15f5f0e05c65dd5
+  branch: 0-4-2
+  specs:
+    manhattan (0.4.2)
+      bourbon (~> 3.2.0)
+      neat (~> 1.4.0)
+      sass (~> 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -42,6 +52,9 @@ GEM
     arel (6.0.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bourbon (3.2.4)
+      sass (~> 3.2)
+      thor
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -64,11 +77,14 @@ GEM
     execjs (2.3.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    frontie (0.3.0)
     geocoder (1.1.8)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
     google_directions (0.1.6.2)
       nokogiri (>= 1.4.1)
+    haml (4.0.6)
+      tilt
     hike (1.2.3)
     http (0.5.1)
       http_parser.rb
@@ -93,6 +109,9 @@ GEM
     multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    neat (1.4.0)
+      bourbon (>= 2.1)
+      sass (>= 3.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     oauth2 (1.0.0)
@@ -188,10 +207,13 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   dotenv-rails
+  frontie
   geocoder
   google_directions
+  haml
   jbuilder (~> 2.0)
   jquery-rails
+  manhattan!
   pg
   rails (= 4.2.0)
   redis
