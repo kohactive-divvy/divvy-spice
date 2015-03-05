@@ -13,4 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+
+//= require bootstrap
+//= require vendor/ripples
+//= require vendor/material
+
+$(document).ready(function() {
+  $.material.init()
+})
