@@ -1,0 +1,60 @@
+.sidebar
+  position: absolute
+  z-index: 10
+  width: $sidebar-width
+  height: 100%
+  overflow: hidden
+  box-shadow: 0 0 35px 0 rgba(black, 0.8)
+  background-color: $purple
+  color: white
+
+  .btn-primary
+    margin-top: $padding
+
+.sidebar-inner
+  position: absolute
+  left: 0
+  width: 200%
+  height: 100% 
+  +transition
+
+.sidebar-show-results
+  .sidebar-inner
+    left: -100%
+
+.sidebar-initial-state,
+.sidebar-result
+  position: absolute
+  width: 50%
+  height: 100%
+  padding: $padding * 3
+
+.sidebar-result
+  left: 50%
+  padding: 0
+  background-color: white
+
+.sidebar-result-header
+  padding: 17px 0
+  background-color: $purple
+  text-align: center
+
+  h2
+    margin: 0
+    font-size: 20px
+    color: $purple-lighter
+
+  .btn:not(.btn-link):not(.btn-flat)
+    position: absolute
+    top: 8px
+    left: $padding * 3
+    width: auto
+    margin: 0
+    border-radius: $border-radius-base
+    border: 1px solid $purple-lighter
+    padding: 10px 14px 8px 13px
+    color: $purple-lighter
+    +transition
+
+    &:hover
+      background-color: rgba($purple-lighter, 0.1)

@@ -13,10 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require angular
 
 //= require bootstrap
 //= require vendor/ripples
 //= require vendor/material
+
+//= require divvy-app
 
 $(document).ready(function() {
   $.material.init()
