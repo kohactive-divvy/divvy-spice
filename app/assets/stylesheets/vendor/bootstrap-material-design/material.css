@@ -2316,7 +2316,10 @@ body.inverse,
 body.inverse .form-control {
   color: rgba(255, 255, 255, 0.84);
 }
-body,
+body {
+  font-weight: 300;
+}
+
 h1,
 h2,
 h3,
@@ -2327,8 +2330,8 @@ h6,
 .h2,
 .h3,
 .h4 {
-  font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
+  /*font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  font-weight: 600;
 }
 h5,
 h6 {
