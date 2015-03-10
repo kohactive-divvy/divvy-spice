@@ -20,7 +20,4 @@
 //= require vendor/material
 
 //= require divvy-app
-
-$(document).ready(function() {
-  $.material.init()
-})
+//= require page

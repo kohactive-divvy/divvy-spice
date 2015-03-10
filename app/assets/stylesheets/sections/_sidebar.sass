@@ -29,10 +29,85 @@
   height: 100%
   padding: $padding * 3
 
+.sidebar-initial-state
+  p
+    margin: $padding 0 ($padding * 2)
+    font-size: 16px
+    line-height: 1.6
+
+  .input
+    position: relative
+
+    &:before
+      content: "\e88b"
+      position: absolute
+      top: 12px
+      left: 8px
+      color: $gray
+      font-family: "Material-Design-Icons"
+      font-size: 17px
+
+    input
+      padding-left: 30px
+
+  .sidebar-initial-state-destination
+    &:before
+      content: "\f192"
+      font-family: FontAwesome
+
+  .kohactive
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    border-top: 1px solid $gray
+    padding: ($padding * 1.5) 0
+    background-color: lighten($gray, 50%)
+    color: lighten($gray, 10%)
+    text-align: center
+    +transition
+
+    &:hover,
+    &:focus
+      text-decoration: none
+
+    &:hover
+      background-color: white
+
+      .chicon
+        color: #FF0000
+
+      span
+        color: darken(#B3DDF2, 10%)
+
+    .chicon
+      display: inline-block
+      padding: 0 10px 8px
+      font-size: 12px
+      +transition
+      
+      &:before
+        content: "c"
+        font-family: chicago
+
+    span
+      display: inline-block
+      padding: 0 5px
+      font-size: 12px
+      font-weight: $font-weight-bold
+      text-transform: uppercase
+      +transition
+
+    img
+      display: block
+      width: 150px
+      margin: 0 auto
+
 .sidebar-result
   left: 50%
   padding: 0
   background-color: white
+  color: black
 
 .sidebar-result-header
   padding: 17px 0
@@ -47,7 +122,7 @@
   .btn:not(.btn-link):not(.btn-flat)
     position: absolute
     top: 8px
-    left: $padding * 3
+    left: $padding * 2
     width: auto
     margin: 0
     border-radius: $border-radius-base
@@ -58,3 +133,120 @@
 
     &:hover
       background-color: rgba($purple-lighter, 0.1)
+
+.sidebar-result-body
+  overflow-y: auto
+  margin-bottom: $padding * 2
+  padding: ($padding * 2) ($padding * 2) 0
+
+  h3
+    margin-bottom: $padding * 2
+    font-size: 28px
+    text-align: center
+
+.sidebar-result-time
+  overflow: hidden
+  margin-bottom: $padding * 4
+  border-radius: $border-radius-base $border-radius-base 0 0
+  background-color: $purple-light
+  font-style: italic
+  text-align: center
+
+.sidebar-result-time-average
+  padding: $padding / 2
+  color: white
+
+  span
+    display: block
+    margin-top: -8px
+    font-size: 35px
+    font-weight: $font-weight-bold
+    font-style: normal
+
+.sidebar-result-time-slowest,
+.sidebar-result-time-fastest
+  float: left
+  width: 50%
+  overflow: hidden
+  border-radius: 0 0 0 $border-radius-base
+  border: 1px solid $gray
+  padding: $padding / 2
+  background-color: white
+  color: $gray
+
+  span
+    margin-left: 2px
+    font-weight: $font-weight-bold
+    font-style: normal
+
+.sidebar-result-time-fastest
+  border-radius: 0 0 $border-radius-base
+  border-left: 0
+
+.sidebar-result-directions
+  h4
+    margin-bottom: 0
+    border-top: 1px solid $gray
+    border-bottom: 1px solid $gray
+    padding: ($padding * 1.5) 0
+    font-size: 24px
+
+.direction
+  position: relative
+  border-bottom: 1px solid $gray
+  font-size: 18px
+
+$direction-left-width : 28px
+.direction-left
+  position: absolute
+  top: 0
+  left: 0
+  width: $direction-left-width
+  height: 100%
+  font-size: 16px
+
+  span
+    font-weight: $font-weight-bold
+
+.direction-left-centered
+  position: absolute
+  top: 50%
+  left: 50%
+  +transform(translateX(-50%) translateY(-50%))
+  text-align: center
+
+.direction-right
+  margin-left: $direction-left-width
+  padding: ($padding * 2) $padding
+
+  span
+    display: block
+    font-size: 14px
+
+.direction-start,
+.direction-end
+  .direction-right
+    span
+      font-weight: $font-weight-bold
+      text-transform: uppercase
+
+.direction-step
+  .direction-right
+    span
+      font-style: italic
+
+.direction-start
+  .direction-left
+    background-color: #b2e7bc
+
+.direction-step-walking
+  .direction-left
+    background-color: #eeeeee
+
+.direction-step-bicycling
+  .direction-left
+    background-color: #9edbf1
+
+.direction-end
+  .direction-left
+    background-color: #e9a58e

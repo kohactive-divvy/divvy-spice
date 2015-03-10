@@ -2,19 +2,82 @@
   .sidebar{ng_class: "{\"sidebar-show-results\": areResultsShowing}" }
     .sidebar-inner
       .sidebar-initial-state
-        %h1 Title
-        %p Lorem ipsum dolor sit amet
+        %h1 Divvy Trip Planner
+        %p Enter origin & destination to get step-by-step directions with time estimates based on 2013 &ndash; 2014 Divvy trip data.
+        %form{name: "directionsForm"}
+          .input-group
+            .input
+              %input{placeholder: "Choose an origin...", ng_model: "directionsOrigin", required: true}
+            .sidebar-initial-state-destination.input
+              %input{placeholder: "Choose a destination...", ng_model: "directionsDestination", required: true}
 
-        .input-group
-          %input{placeholder: "Choose a starting point..."}
-          %input{placeholder: "Choose a destination..."}
+          %input.btn.btn-primary{type: "submit", value: "Calculate Trip", ng_disabled: "!directionsForm.$valid", ng_click: "clickToggleResults()"} 
 
-        %button.btn.btn-primary{ng_click: "clickToggleResults()"} Calculate Trip
+        = link_to "//kohactive.com", class: "kohactive", target: "_blank" do
+          .chicon
+          .chicon
+          %span Made By
+          .chicon
+          .chicon
+          = image_tag "kohactive.svg", alt: "kohactive"
 
       .sidebar-result
         .sidebar-result-header
           %button.btn.fa.fa-chevron-left{ng_click: "clickToggleResults()"}
-          %h2 Results
+          %h2 Result
+
+        .sidebar-result-body
+          %h3 We've calculated your trip!
+
+          .sidebar-result-time
+            .sidebar-result-time-average
+              average
+              %span 27min
+
+            .sidebar-result-time-slowest
+              slowest
+              %span 35min
+
+            .sidebar-result-time-fastest
+              fastest
+              %span 23min
+
+          .sidebar-result-directions
+            %h4 Directions
+
+            .direction-start.direction
+              .direction-left
+                .mdi-maps-place.direction-left-centered
+              .direction-right
+                %span Starting At
+                800 W. Huron St., Chicago, IL 60642
+
+            .direction-step-walking.direction-step.direction
+              .direction-left
+                .direction-left-centered
+                  .mdi-maps-directions-walk
+                  %span S
+                  .fa.fa-arrow-down
+              .direction-right
+                Head South on Halsted
+                %span 5min (.3mi)
+
+            .direction-step-bicycling.direction-step.direction
+              .direction-left
+                .direction-left-centered
+                  .mdi-maps-directions-bike
+                  %span W
+                  .fa.fa-arrow-right
+              .direction-right
+                Head South on Halsted
+                %span 5min (.3mi)
+
+            .direction-end.direction
+              .direction-left
+                .fa.fa-dot-circle-o.direction-left-centered
+              .direction-right
+                %span Ending At
+                Somewhere Ave., Chicago, IL 60642
 
   .map-container
     #map.map{data_initialize_map: true}
