@@ -1,17 +1,10 @@
 # attach functions to Divvy to avoid polluting the global namespace
 window.Divvy = {}
 
-window.divvyApp = angular.module('divvyApp', ['ngResource'])
+window.divvyApp = angular.module('divvyApp', ['restangular', 'ngSanitize'])
 
 divvyApp
-  # temporary http factory
-  .factory "Result", ($http) ->
-    get: ->
-      result = ""
-      $http.get("http://localhost:3000/assets/test-data.json").success (response) ->
-        response
-
-  .controller 'divvyController', ($scope, Result) ->
+  .controller 'divvyController', ['$scope', 'Restangular', ($scope, Restangular) ->
     $scope.areResultsShowing = false
 
     # map defaults to kohactive if no geolocation
@@ -25,17 +18,55 @@ divvyApp
     $scope.clickToggleResults = (e) ->
       if !$scope.areResultsShowing
         Divvy.addLoadingCursor()
-        
-        # temporary timer for effect
-        setTimeout ->
-          Result.get().success (result) ->
-            console.log result
-            $scope.result = result
-            $scope.areResultsShowing = true
-            Divvy.removeLoadingCursor()
-        , 3000
+
+        Restangular.all('api').customGET('trips.json', {"origin": $scope.directionsOrigin, "destination": $scope.directionsDestination}).then (result) ->
+          $scope.result = result
+          
+          originMarker = new google.maps.Marker
+            position: new google.maps.LatLng $scope.result.divvy.origin_latlng[0], $scope.result.divvy.origin_latlng[1]
+            title: "origin"
+            map: $scope.mapData.map
+
+          $scope.walkingToDirections    = result.divvy.routes.walking_to.DirectionsResponse.route.leg.step
+          $scope.walkingToPolyline      = result.divvy.routes.walking_to.DirectionsResponse.route.overview_polyline.points
+          walkingToMapPolyline = new google.maps.Polyline
+            path: google.maps.geometry.encoding.decodePath $scope.walkingToPolyline
+
+          bikingStartMarker = new google.maps.Marker
+            position: new google.maps.LatLng $scope.result.divvy.origin_station.lat, $scope.result.divvy.origin_station.lng
+            title: "biking origin"
+            map: $scope.mapData.map
+
+          $scope.bikingDirections       = result.divvy.routes.biking.DirectionsResponse.route.leg.step
+          $scope.bikingPolyline         = result.divvy.routes.biking.DirectionsResponse.route.overview_polyline.points
+          bikingMapPolyline = new google.maps.Polyline
+            path: google.maps.geometry.encoding.decodePath $scope.bikingPolyline 
+          
+          bikingEndMarker = new google.maps.Marker
+            position: new google.maps.LatLng $scope.result.divvy.destination_station.lat, $scope.result.divvy.destination_station.lng
+            title: "biking destination"
+            map: $scope.mapData.map
+
+          $scope.walkingFromDirections  = result.divvy.routes.walking_from.DirectionsResponse.route.leg.step
+          $scope.walkingFromPolyline    = result.divvy.routes.walking_from.DirectionsResponse.route.overview_polyline.points
+          walkingFromMapPolyline = new google.maps.Polyline
+            path: google.maps.geometry.encoding.decodePath $scope.walkingFromPolyline 
+
+          destinationMarker = new google.maps.Marker
+            position: new google.maps.LatLng $scope.result.divvy.destination_latlng[0], $scope.result.divvy.destination_latlng[1]
+            title: "destination"
+            map: $scope.mapData.map
+
+          walkingToMapPolyline.setMap $scope.mapData.map
+          bikingMapPolyline.setMap $scope.mapData.map
+          walkingFromMapPolyline.setMap $scope.mapData.map
+
+          $scope.areResultsShowing = true
+          Divvy.removeLoadingCursor()
+
       else
         $scope.areResultsShowing = false
+  ]
 
   .directive 'initializeMap', ->
     link: ($scope) ->

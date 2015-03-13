@@ -64,6 +64,10 @@ module Divvy
 
         {
           divvy: {
+            origin_latlng: [olat, olng],
+            destination_latlng: [dlat, dlng],
+            origin_station: origin_closest_station,
+            destination_station: destination_closest_station,
             price: "$7",
             google: google_divvy_transit_time,
             avg: divvy_transit_time_avg,
@@ -73,7 +77,7 @@ module Divvy
             routes: {
               walking_to: Hash.from_xml(walking_to_directions.xml),
               biking: Hash.from_xml(biking_directions.xml),
-              walking_from: Hash.from_xml(walking_to_directions.xml)
+              walking_from: Hash.from_xml(walking_from_directions.xml)
             }
           },
           uber: ubers,

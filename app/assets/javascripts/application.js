@@ -14,8 +14,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+
 //= require angular
-//= require angular-resource
+//= require angular-sanitize
+//= require vendor/lodash
+//= require vendor/restangular
 
 //= require bootstrap
 //= require vendor/ripples
