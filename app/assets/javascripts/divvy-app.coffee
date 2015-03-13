@@ -1,19 +1,41 @@
-window.divvyApp = angular.module('divvyApp', [])
+# attach functions to Divvy to avoid polluting the global namespace
+window.Divvy = {}
+
+window.divvyApp = angular.module('divvyApp', ['ngResource'])
 
 divvyApp
-  .controller 'divvyController', ($scope) ->
+  # temporary http factory
+  .factory "Result", ($http) ->
+    get: ->
+      result = ""
+      $http.get("http://localhost:3000/assets/test-data.json").success (response) ->
+        response
+
+  .controller 'divvyController', ($scope, Result) ->
     $scope.areResultsShowing = false
 
-    # map defaults if no geolocation
+    # map defaults to kohactive if no geolocation
     $scope.mapData =
       map: ''
       center:
-        latitude: 41.8781136
-        longitude: -87.62979819999998
+        latitude: 41.895535
+        longitude: -87.648056
       zoom: 14
 
-    $scope.clickToggleResults = ->
-      $scope.areResultsShowing = !$scope.areResultsShowing
+    $scope.clickToggleResults = (e) ->
+      if !$scope.areResultsShowing
+        Divvy.addLoadingCursor()
+        
+        # temporary timer for effect
+        setTimeout ->
+          Result.get().success (result) ->
+            console.log result
+            $scope.result = result
+            $scope.areResultsShowing = true
+            Divvy.removeLoadingCursor()
+        , 3000
+      else
+        $scope.areResultsShowing = false
 
   .directive 'initializeMap', ->
     link: ($scope) ->

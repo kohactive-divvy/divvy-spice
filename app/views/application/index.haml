@@ -32,15 +32,15 @@
           .sidebar-result-time
             .sidebar-result-time-average
               average
-              %span 27min
+              %span {{result.divvy.avg}}min
 
             .sidebar-result-time-slowest
               slowest
-              %span 35min
+              %span {{result.divvy.max}}min
 
             .sidebar-result-time-fastest
               fastest
-              %span 23min
+              %span {{result.divvy.min}}min
 
           .sidebar-result-directions
             %h4 Directions
