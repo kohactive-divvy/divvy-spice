@@ -1,0 +1,23 @@
+.input-group
+  width: 100%
+  overflow: hidden
+  border-radius: $border-radius-base
+  border: 1px solid $purple-light
+
+  .input:first-child
+    border-bottom: 1px solid $purple-light
+
+  input
+    display: block
+    width: 100%
+    border: 0
+    +transition
+
+    &:hover,
+    &:focus
+      background-color: lighten($purple-light, 40%)
+
+input
+  padding: 13px
+  color: black
+  font-size: 16px

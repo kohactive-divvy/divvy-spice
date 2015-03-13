@@ -45,13 +45,6 @@ Then, run this script to get the list.
  *  @text-color ---> rgba(255,255,255,0.84), rgba(0,0,0,0.84), rgba(255,255,255,0.84) ...
  *
  */
-@font-face {
-  font-family: "Material-Design-Icons";
-  src: url("../fonts/Material-Design-Icons.eot?-g7cqhn");
-  src: url("../fonts/Material-Design-Icons.eot?#iefix-g7cqhn") format("embedded-opentype"), url("../fonts/Material-Design-Icons.woff?-g7cqhn") format("woff"), url("../fonts/Material-Design-Icons.ttf?-g7cqhn") format("truetype"), url("../fonts/Material-Design-Icons.svg?-g7cqhn#Material-Design-Icons") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
 [class^="mdi-"],
 [class*=" mdi-"] {
   font-family: "Material-Design-Icons";
@@ -2316,7 +2309,10 @@ body.inverse,
 body.inverse .form-control {
   color: rgba(255, 255, 255, 0.84);
 }
-body,
+body {
+  font-weight: 300;
+}
+
 h1,
 h2,
 h3,
@@ -2327,8 +2323,8 @@ h6,
 .h2,
 .h3,
 .h4 {
-  font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
+  /*font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  font-weight: 600;
 }
 h5,
 h6 {
