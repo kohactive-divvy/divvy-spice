@@ -1,56 +1,83 @@
-.bs-component
-  .navbar.navbar-default
-    .navbar-header
-      %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      %a.navbar-brand{:href => "javascript:void(0)"}
-        Brand
-        .ripple-wrapper
-    .navbar-collapse.collapse.navbar-responsive-collapse
-      %ul.nav.navbar-nav
-        %li.active
-          %a{:href => "javascript:void(0)"}
-            Active
-            .ripple-wrapper
-        %li
-          %a{:href => "javascript:void(0)"}
-            Link
-            .ripple-wrapper
-        %li.dropdown
-          %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "bootstrap-elements.html"}
-            Dropdown
-            %b.caret
-          %ul.dropdown-menu
-            %li
-              %a{:href => "javascript:void(0)"} Action
-            %li
-              %a{:href => "javascript:void(0)"} Another action
-            %li
-              %a{:href => "javascript:void(0)"} Something else here
-            %li.divider
-            %li.dropdown-header Dropdown header
-            %li
-              %a{:href => "javascript:void(0)"} Separated link
-            %li
-              %a{:href => "javascript:void(0)"} One more separated link
-      %form.navbar-form.navbar-left
-        %input.form-control.col-lg-8{:placeholder => "Search", :type => "text"}/
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{:href => "javascript:void(0)"} Link
-        %li.dropdown
-          %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "bootstrap-elements.html"}
-            Dropdown
-            %b.caret
-          %ul.dropdown-menu
-            %li
-              %a{:href => "javascript:void(0)"} Action
-            %li
-              %a{:href => "javascript:void(0)"} Another action
-            %li
-              %a{:href => "javascript:void(0)"} Something else here
-            %li.divider
-            %li
-              %a{:href => "javascript:void(0)"} Separated link
+.main-container{ng_controller: "divvyController"}
+  .sidebar{ng_class: "{\"sidebar-show-results\": areResultsShowing}" }
+    .sidebar-inner
+      .sidebar-initial-state
+        %h1 Divvy Trip Planner
+        %p Enter origin & destination to get step-by-step directions with time estimates based on 2013 &ndash; 2014 Divvy trip data.
+        %form{name: "directionsForm"}
+          .input-group
+            .input
+              %input{placeholder: "Choose an origin...", ng_model: "directionsOrigin", required: true}
+            .sidebar-initial-state-destination.input
+              %input{placeholder: "Choose a destination...", ng_model: "directionsDestination", required: true}
+
+          %input.btn.btn-primary{type: "submit", value: "Calculate Trip", ng_disabled: "!directionsForm.$valid", ng_click: "clickToggleResults()"} 
+
+        = link_to "//kohactive.com", class: "kohactive", target: "_blank" do
+          .chicon
+          .chicon
+          %span Made By
+          .chicon
+          .chicon
+          = image_tag "kohactive.svg", alt: "kohactive"
+
+      .sidebar-result
+        .sidebar-result-header
+          %button.btn.fa.fa-chevron-left{ng_click: "clickToggleResults()"}
+          %h2 Result
+
+        .sidebar-result-body
+          %h3 We've calculated your trip!
+
+          .sidebar-result-time
+            .sidebar-result-time-average
+              average
+              %span {{result.divvy.avg}}min
+
+            .sidebar-result-time-slowest
+              slowest
+              %span {{result.divvy.max}}min
+
+            .sidebar-result-time-fastest
+              fastest
+              %span {{result.divvy.min}}min
+
+          .sidebar-result-directions
+            %h4 Directions
+
+            .direction-start.direction
+              .direction-left
+                .mdi-maps-place.direction-left-centered
+              .direction-right
+                %span Starting At
+                800 W. Huron St., Chicago, IL 60642
+
+            .direction-step-walking.direction-step.direction
+              .direction-left
+                .direction-left-centered
+                  .mdi-maps-directions-walk
+                  %span S
+                  .fa.fa-arrow-down
+              .direction-right
+                Head South on Halsted
+                %span 5min (.3mi)
+
+            .direction-step-bicycling.direction-step.direction
+              .direction-left
+                .direction-left-centered
+                  .mdi-maps-directions-bike
+                  %span W
+                  .fa.fa-arrow-right
+              .direction-right
+                Head South on Halsted
+                %span 5min (.3mi)
+
+            .direction-end.direction
+              .direction-left
+                .fa.fa-dot-circle-o.direction-left-centered
+              .direction-right
+                %span Ending At
+                Somewhere Ave., Chicago, IL 60642
+
+  .map-container
+    #map.map{data_initialize_map: true}

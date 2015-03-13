@@ -1,10 +1,18 @@
 !!!
-%html
+%html{"ng-app" => "divvyApp"}
   %head
     %title DivvySpice
-    %link{:href => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css", :rel => "stylesheet"}
+    = stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,600,700"
+    
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    
+    = javascript_include_tag "//maps.googleapis.com/maps/api/js?sensor=false"
+
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    
     = csrf_meta_tags
   %body
     = yield
+    .loading-cursor

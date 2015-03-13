@@ -6,8 +6,11 @@ gem 'rails', '4.2.0'
 
 gem 'active_model_serializers', "0.9.3"
 gem 'activerecord-postgis-adapter', '3.0.0.beta2'
+gem 'angularjs-rails'
+gem 'bootstrap-sass', github: 'johnkoht/bootstrap-sass', branch: 'move-variables-into-components'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'dotenv-rails'
+gem 'font-awesome-rails'
 gem 'frontie'
 gem 'geocoder'
 gem 'google_directions'
