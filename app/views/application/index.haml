@@ -29,7 +29,7 @@
         .sidebar-result-body
           %h3 We've calculated your trip!
 
-          .sidebar-result-time
+          .sidebar-result-time{ ng_if: "result.divvy.trips" }
             .sidebar-result-time-average
               average
               %span {{result.divvy.avg}}min
@@ -50,34 +50,61 @@
                 .mdi-maps-place.direction-left-centered
               .direction-right
                 %span Starting At
-                800 W. Huron St., Chicago, IL 60642
+                {{directionsOrigin}}
 
-            .direction-step-walking.direction-step.direction
-              .direction-left
-                .direction-left-centered
-                  .mdi-maps-directions-walk
-                  %span S
-                  .fa.fa-arrow-down
-              .direction-right
-                Head South on Halsted
-                %span 5min (.3mi)
+            %div{ng_repeat: "step in walkingToDirections"}
+              .direction-step-walking.direction-step.direction
+                .direction-left
+                  .direction-left-centered
+                    .mdi-maps-directions-walk
+                    %span S
+                    .fa.fa-arrow-down
+                .direction-right
+                  %div{ng_bind_html: "step.html_instructions"}
+                  %span {{step.duration.text}} ({{step.distance.text}})
 
-            .direction-step-bicycling.direction-step.direction
+            .direction-start.direction
               .direction-left
-                .direction-left-centered
-                  .mdi-maps-directions-bike
-                  %span W
-                  .fa.fa-arrow-right
+                .mdi-maps-place.direction-left-centered
               .direction-right
-                Head South on Halsted
-                %span 5min (.3mi)
+                %span Grab a Divvy at
+                {{result.divvy.origin_station.name}}
+
+            %div{ng_repeat: "step in bikingDirections"}
+              .direction-step-bicycling.direction-step.direction
+                .direction-left
+                  .direction-left-centered
+                    .mdi-maps-directions-bike
+                    %span W
+                    .fa.fa-arrow-right
+                .direction-right
+                  %div{ng_bind_html: "step.html_instructions"}
+                  %span {{step.duration.text}} ({{step.distance.text}})
+
+            .direction-start.direction
+              .direction-left
+                .mdi-maps-place.direction-left-centered
+              .direction-right
+                %span Dispose of your Divvy at
+                {{result.divvy.destination_station.name}}
+
+            %div{ng_repeat: "step in walkingFromDirections"}
+              .direction-step-walking.direction-step.direction
+                .direction-left
+                  .direction-left-centered
+                    .mdi-maps-directions-walk
+                    %span S
+                    .fa.fa-arrow-down
+                .direction-right
+                  %div{ng_bind_html: "step.html_instructions"}
+                  %span {{step.duration.text}} ({{step.distance.text}})
 
             .direction-end.direction
               .direction-left
                 .fa.fa-dot-circle-o.direction-left-centered
               .direction-right
                 %span Ending At
-                Somewhere Ave., Chicago, IL 60642
+                {{directionsDestination}}
 
   .map-container
     #map.map{data_initialize_map: true}
