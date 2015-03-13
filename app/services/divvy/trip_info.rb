@@ -28,7 +28,8 @@ module Divvy
         
         biking_directions = GoogleDirections.new(ostring, dstring, {long_lat: true, mode: "bicycling"})
         driving_directions = GoogleDirections.new(ostring, dstring, {long_lat: true, mode: "driving"})
-        
+
+
         google_divvy_transit_time = walking_to_directions.drive_time_in_minutes + walking_from_directions.drive_time_in_minutes + biking_directions.drive_time_in_minutes
         
         puts origin_closest_station.inspect
@@ -68,9 +69,17 @@ module Divvy
             avg: divvy_transit_time_avg,
             min: divvy_transit_time_min,
             max: divvy_transit_time_max,
-            trips: divvy_trips
+            trips: divvy_trips,
+            routes: {
+              walking_to: Hash.from_xml(walking_to_directions.xml),
+              biking: Hash.from_xml(biking_directions.xml),
+              walking_from: Hash.from_xml(walking_to_directions.xml)
+            }
           },
-          uber: ubers
+          uber: ubers,
+          routes: {
+            driving: Hash.from_xml(driving_directions.xml),
+          }
         }
         
       end    
