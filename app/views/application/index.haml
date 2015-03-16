@@ -57,8 +57,7 @@
                 .direction-left
                   .direction-left-centered
                     .mdi-maps-directions-walk
-                    %span S
-                    .fa.fa-arrow-down
+                    .fa{ng_if: "step.maneuver", ng_class: "'fa-arrow-' + maneuverToIcon(step.maneuver)"}
                 .direction-right
                   %div{ng_bind_html: "step.html_instructions"}
                   %span {{step.duration.text}} ({{step.distance.text}})
@@ -75,8 +74,7 @@
                 .direction-left
                   .direction-left-centered
                     .mdi-maps-directions-bike
-                    %span W
-                    .fa.fa-arrow-right
+                    .fa{ng_if: "step.maneuver", ng_class: "'fa-arrow-' + maneuverToIcon(step.maneuver)"}
                 .direction-right
                   %div{ng_bind_html: "step.html_instructions"}
                   %span {{step.duration.text}} ({{step.distance.text}})
@@ -93,8 +91,7 @@
                 .direction-left
                   .direction-left-centered
                     .mdi-maps-directions-walk
-                    %span S
-                    .fa.fa-arrow-down
+                    .fa{ng_if: "step.maneuver", ng_class: "'fa-arrow-' + maneuverToIcon(step.maneuver)"}
                 .direction-right
                   %div{ng_bind_html: "step.html_instructions"}
                   %span {{step.duration.text}} ({{step.distance.text}})

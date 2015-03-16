@@ -15,6 +15,16 @@ divvyApp
         longitude: -87.648056
       zoom: 14
 
+    # Maneuvers almost always end in the word we need to apply the
+    # correct arrow icon class. This splits the string at the hyphen(s)
+    # and returns it if it is 'left' or 'right' since that's
+    # all that's supported for now.
+    $scope.maneuverToIcon = (maneuver) ->
+      maneuverSplit     = maneuver.split '-'
+      maneuverLastWord  = maneuverSplit[maneuverSplit.length - 1]
+      if maneuverLastWord == 'left' or maneuverLastWord == 'right'
+        maneuverLastWord
+
     $scope.clickToggleResults = (e) ->
       if !$scope.areResultsShowing
         Divvy.addLoadingCursor()
