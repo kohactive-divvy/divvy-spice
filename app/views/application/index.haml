@@ -105,3 +105,15 @@
 
   .map-container
     #map.map{data_initialize_map: true}
+
+
+  #error-modal.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+          %h4.modal-title Hold Up!
+        .modal-body
+          %p {{serverError}}
+        .modal-footer
+          %button.btn.btn-primary{"data-dismiss" => "modal"} OK

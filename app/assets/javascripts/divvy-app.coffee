@@ -27,6 +27,12 @@ divvyApp
       if maneuverLastWord == 'left' or maneuverLastWord == 'right'
         maneuverLastWord
 
+    # serverError is null by default
+    $scope.serverError = null
+
+    $scope.dismissError = ->
+      $('#error-modal').modal 'hide'
+
     $scope.clickToggleResults = (e) ->
       if !$scope.areResultsShowing
         Divvy.addLoadingCursor()
@@ -99,6 +105,11 @@ divvyApp
 
           $scope.areResultsShowing = true
           Divvy.removeLoadingCursor()
+
+        , (error) ->
+          Divvy.removeLoadingCursor()
+          $scope.serverError = error.data.error
+          $('#error-modal').modal()
 
       else
         $scope.areResultsShowing = false
