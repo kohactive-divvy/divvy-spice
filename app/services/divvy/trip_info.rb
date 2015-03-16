@@ -10,7 +10,6 @@ module Divvy
 
 
         f = RGeo::Geographic.spherical_factory(srid: 4326)
-        
         olat = o[0].geometry["location"]["lat"] rescue raise(StandardError, "Origin location is not valid")
         olng = o[0].geometry["location"]["lng"] rescue raise(StandardError, "Origin location is not valid")
         dlat = d[0].geometry["location"]["lat"] rescue raise(StandardError, "Destination location is not valid")

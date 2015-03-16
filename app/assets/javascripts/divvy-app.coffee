@@ -15,6 +15,12 @@ divvyApp
         longitude: -87.648056
       zoom: 14
 
+    # serverError is null by default
+    $scope.serverError = null
+
+    $scope.dismissError = ->
+      $('#error-modal').modal 'hide'
+
     $scope.clickToggleResults = (e) ->
       if !$scope.areResultsShowing
         Divvy.addLoadingCursor()
@@ -63,6 +69,11 @@ divvyApp
 
           $scope.areResultsShowing = true
           Divvy.removeLoadingCursor()
+
+        , (error) ->
+          Divvy.removeLoadingCursor()
+          $scope.serverError = error.data.error
+          $('#error-modal').modal()
 
       else
         $scope.areResultsShowing = false
