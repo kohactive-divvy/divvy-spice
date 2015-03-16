@@ -1,6 +1,24 @@
 # attach functions to Divvy to avoid polluting the global namespace
 window.Divvy = {}
 
+# this symbol is repeated along a polyline to create a dashed line
+lineSymbol = 
+  path: 'M 0,-1 0,1'
+  strokeOpacity: 0.7
+  strokeWeight: 6
+  scale: 1
+
+iconBase  = '//www.google.com/mapfiles/ms/micons/'
+icons     = 
+  origin      : "#{iconBase}green-dot.png"
+  destination : "#{iconBase}red-dot.png"
+  divvy       : "#{iconBase}ltblue-dot.png"
+  dashed      : [ {
+                    icon: lineSymbol
+                    offset: '0'
+                    repeat: '13px'
+                  } ]
+
 window.divvyApp = angular.module('divvyApp', ['restangular', 'ngSanitize'])
 
 divvyApp
@@ -53,6 +71,7 @@ divvyApp
             position: new google.maps.LatLng $scope.result.divvy.origin_latlng[0], $scope.result.divvy.origin_latlng[1]
             title: "Origin"
             map: $scope.mapData.map
+            icon: icons['origin']
           $scope.mapData.overlays.push originMarker
           $scope.mapData.bounds.extend originMarker.position
 
@@ -60,12 +79,16 @@ divvyApp
           $scope.walkingToPolyline      = result.divvy.routes.walking_to.DirectionsResponse.route.overview_polyline.points
           walkingToMapPolyline = new google.maps.Polyline
             path: google.maps.geometry.encoding.decodePath $scope.walkingToPolyline
+            strokeColor: 'green'
+            strokeOpacity: 0
+            icons: icons.dashed
           $scope.mapData.overlays.push(walkingToMapPolyline)
 
           bikingStartMarker = new google.maps.Marker
             position: new google.maps.LatLng $scope.result.divvy.origin_station.lat, $scope.result.divvy.origin_station.lng
             title: "Divvy Origin Station"
             map: $scope.mapData.map
+            icon: icons['divvy']
           $scope.mapData.overlays.push(bikingStartMarker)
           $scope.mapData.bounds.extend bikingStartMarker.position
 
@@ -73,12 +96,16 @@ divvyApp
           $scope.bikingPolyline         = result.divvy.routes.biking.DirectionsResponse.route.overview_polyline.points
           bikingMapPolyline = new google.maps.Polyline
             path: google.maps.geometry.encoding.decodePath $scope.bikingPolyline
+            strokeColor: '#3db7e4'
+            strokeWeight: 8
+            strokeOpacity: 0.7
           $scope.mapData.overlays.push(bikingMapPolyline)
           
           bikingEndMarker = new google.maps.Marker
             position: new google.maps.LatLng $scope.result.divvy.destination_station.lat, $scope.result.divvy.destination_station.lng
             title: "Divvy Destination Station"
             map: $scope.mapData.map
+            icon: icons['divvy']
           $scope.mapData.overlays.push(bikingEndMarker)
           $scope.mapData.bounds.extend bikingEndMarker.position
 
@@ -86,12 +113,16 @@ divvyApp
           $scope.walkingFromPolyline    = result.divvy.routes.walking_from.DirectionsResponse.route.overview_polyline.points
           walkingFromMapPolyline = new google.maps.Polyline
             path: google.maps.geometry.encoding.decodePath $scope.walkingFromPolyline
+            strokeColor: 'red'
+            strokeOpacity: 0
+            icons: icons.dashed
           $scope.mapData.overlays.push(walkingFromMapPolyline)
 
           destinationMarker = new google.maps.Marker
             position: new google.maps.LatLng $scope.result.divvy.destination_latlng[0], $scope.result.divvy.destination_latlng[1]
             title: "Destination"
             map: $scope.mapData.map
+            icon: icons['destination']
           $scope.mapData.overlays.push(destinationMarker)
           $scope.mapData.bounds.extend destinationMarker.position
 

@@ -64,7 +64,7 @@
 
             .direction-start.direction
               .direction-left
-                .mdi-maps-place.direction-left-centered
+                .divvy-icon.direction-left-centered
               .direction-right
                 %span Grab a Divvy at
                 {{result.divvy.origin_station.name}}
@@ -79,9 +79,9 @@
                   %div{ng_bind_html: "step.html_instructions"}
                   %span {{step.duration.text}} ({{step.distance.text}})
 
-            .direction-start.direction
+            .direction-end.direction
               .direction-left
-                .mdi-maps-place.direction-left-centered
+                .divvy-icon.direction-left-centered
               .direction-right
                 %span Dispose of your Divvy at
                 {{result.divvy.destination_station.name}}
