@@ -7,9 +7,9 @@
         %form{name: "directionsForm"}
           .input-group
             .input
-              %input{placeholder: "Choose an origin...", ng_model: "directionsOrigin", required: true}
+              %input{placeholder: "Choose an origin...", ng_model: "directionsOrigin", required: true, ng_autocomplete: true}
             .sidebar-initial-state-destination.input
-              %input{placeholder: "Choose a destination...", ng_model: "directionsDestination", required: true}
+              %input{placeholder: "Choose a destination...", ng_model: "directionsDestination", required: true, ng_autocomplete: true}
 
           %input.btn.btn-primary{type: "submit", value: "Calculate Trip", ng_disabled: "!directionsForm.$valid", ng_click: "clickToggleResults()"} 
 

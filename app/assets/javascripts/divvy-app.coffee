@@ -19,7 +19,7 @@ icons     =
                     repeat: '13px'
                   } ]
 
-window.divvyApp = angular.module('divvyApp', ['restangular', 'ngSanitize'])
+window.divvyApp = angular.module('divvyApp', ['restangular', 'ngSanitize', 'ngAutocomplete'])
 
 divvyApp
   .controller 'divvyController', ['$scope', 'Restangular', ($scope, Restangular) ->
@@ -182,3 +182,15 @@ divvyApp
       $scope.$watch 'map.center', (coords) ->
         if $scope.mapData.map
           $scope.mapData.map.setCenter new google.maps.LatLng(coords.latitude, coords.longitude)
+
+  # * adding on to included autocomplete directive *
+  #
+  # Enter tries to submit the form before the autocompleted
+  # data is in the input. This disables the enter key if the
+  # autocomplete window is visible. Double-enter to submit.
+  #
+  .directive 'ngAutocomplete', ->
+    link: ($scope, element) ->
+      google.maps.event.addDomListener element[0], 'keydown', (e) ->
+        if e.keyCode == 13 and $('.pac-container').is ':visible'
+          e.preventDefault()
