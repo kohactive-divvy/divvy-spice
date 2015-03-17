@@ -30,9 +30,12 @@
           %h3 We've calculated your trip!
 
           .sidebar-result-time{ ng_if: "result.divvy.trips" }
-            .sidebar-result-time-average
+            .sidebar-result-time-average{ng_class: "resultColor"}
               average
               %span {{result.divvy.avg}}min
+              
+              %button.btn{ng_popover: true, type: "button"} {{result.divvy.trips}}
+
 
             .sidebar-result-time-slowest
               slowest
