@@ -92,8 +92,8 @@ production:
   encoding: unicode
   postgis_extension: postgis      # default is postgis
   schema_search_path: public,postgis
-  pool: 5
+  pool: 15
   host: <%= ENV['DATABASE_HOST'] %>
   database: <%= ENV['DATABASE_NAME'] %>    # your database name
   username: <%= ENV['DATABASE_USER'] %>           # the username your app will use to 
-
+  password: <%= ENV['DATABASE_PASSWORD'] %> 
