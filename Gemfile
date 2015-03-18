@@ -19,6 +19,7 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'redis'
 gem 'manhattan', github: 'kohactive/manhattan', branch: '0-4-2'
+gem 'modernizr-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'turbolinks'
