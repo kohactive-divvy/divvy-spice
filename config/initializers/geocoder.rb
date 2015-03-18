@@ -1,1 +1,1 @@
-Geocoder.configure(:cache => Redis.new)
+Geocoder.configure()
