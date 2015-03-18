@@ -1,0 +1,19 @@
+$percent-1  : #00BF30
+$percent-2  : adjust-hue($percent-1, -20%)
+$percent-3  : adjust-hue($percent-1, -40%)
+$percent-4  : adjust-hue($percent-1, -60%)
+$percent-5  : adjust-hue($percent-1, -80%)
+$percent-6  : adjust-hue($percent-1, -92%)
+$percent-7  : adjust-hue($percent-1, -104%)
+$percent-8  : adjust-hue($percent-1, -116%)
+$percent-9  : adjust-hue($percent-1, -128%)
+$percent-10 : adjust-hue($percent-1, -140%)
+
+$percents  : $percent-1 $percent-2 $percent-3 $percent-4 $percent-5 $percent-6 $percent-8 $percent-8 $percent-9 $percent-10
+
+@for $i from 1 through length($percents)
+  .sidebar-result-color-#{$i}
+    background-color: nth($percents, $i)
+
+    .btn:not(.btn-link):not(.btn-flat)
+      color: nth($percents, $i)
